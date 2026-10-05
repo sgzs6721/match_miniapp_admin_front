@@ -38,6 +38,7 @@ export const adminApi = {
   dashboard: (params) => request(`/admin/dashboard${toQuery(params)}`),
   matchStats: () => request('/admin/stats/matches'),
   leisureStats: () => request('/admin/stats/leisure'),
+  insights: () => request('/admin/web/insights'),
   feedbacks: () => request('/admin/feedbacks'),
   operationLogs: (params) => request(`/admin/operation-logs${toQuery(params)}`)
 }

@@ -1,5 +1,24 @@
 export const mockData = {
   user: { nickname: '平台管理员', admin: 1 },
+  insights: {
+    generatedAt: '2026-10-05 11:30:00',
+    health: { status: 'healthy', errors24h: 0, slowRequests24h: 2 },
+    matchTrend: [
+      { month: '2026-05', matchCount: 142 }, { month: '2026-06', matchCount: 168 },
+      { month: '2026-07', matchCount: 191 }, { month: '2026-08', matchCount: 176 },
+      { month: '2026-09', matchCount: 224 }, { month: '2026-10', matchCount: 96 }
+    ],
+    applyTrend: [
+      { month: '2026-05', participantCount: 3860, entryFee: 76200 }, { month: '2026-06', participantCount: 4290, entryFee: 88400 },
+      { month: '2026-07', participantCount: 5180, entryFee: 104600 }, { month: '2026-08', participantCount: 4870, entryFee: 98200 },
+      { month: '2026-09', participantCount: 6340, entryFee: 132800 }, { month: '2026-10', participantCount: 2810, entryFee: 59400 }
+    ],
+    recentMatches: [
+      { id: 101, matchName: '2026 杭州秋季乒乓球公开赛', matchFormat: 'single', cityName: '杭州', matchStatus: 1, currentParticipants: 86, maxParticipants: 128, createTime: '2026-10-05 09:26:00' },
+      { id: 102, matchName: '浦东新区俱乐部团体邀请赛', matchFormat: 'team', cityName: '上海', matchStatus: 1, currentParticipants: 18, maxParticipants: 24, createTime: '2026-10-04 16:18:00' },
+      { id: 103, matchName: '宁波银球双打积分赛', matchFormat: 'double', cityName: '宁波', matchStatus: 2, currentParticipants: 62, maxParticipants: 64, createTime: '2026-10-04 10:08:00' }
+    ]
+  },
   dashboard: {
     summary: {
       adminName: '王管理员', pendingOrganizerCount: 6, pendingPersonalOrganizerCount: 9,

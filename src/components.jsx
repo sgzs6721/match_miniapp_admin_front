@@ -46,6 +46,18 @@ export function Donut({ segments, total, centerLabel }) {
   </div>
 }
 
+export function TrendChart({ data = [], valueKey = 'value', valueFormatter = formatNumber }) {
+  const max = Math.max(...data.map(item => Number(item[valueKey] || 0)), 1)
+  return <div className="trend-chart">
+    <div className="trend-grid"><i/><i/><i/></div>
+    <div className="trend-columns">{data.map((item) => <div className="trend-column" key={item.month}>
+      <span className="trend-tip">{valueFormatter(item[valueKey])}</span>
+      <div style={{height:`${Math.max(8, Number(item[valueKey] || 0) / max * 100)}%`}}/>
+      <small>{String(item.month || '').slice(5)}月</small>
+    </div>)}</div>
+  </div>
+}
+
 export function DataTable({ columns, rows, empty = '暂无数据', onRowClick }) {
   if (!rows?.length) return <div className="empty"><Inbox/><span>{empty}</span></div>
   return <div className="table-wrap"><table><thead><tr>{columns.map(c => <th key={c.key}>{c.title}</th>)}<th/></tr></thead><tbody>

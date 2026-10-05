@@ -20,6 +20,16 @@ const navItems = [
 
 const statusBadge = (value) => <span className={`badge ${value === 0 ? 'pending' : 'success'}`}>{value === 0 ? '待审核' : '已通过'}</span>
 
+const completeMonthlyTrend = (rows = []) => {
+  const byMonth = new Map(rows.map(row => [row.month, row]))
+  const now = new Date()
+  return Array.from({ length: 6 }, (_, index) => {
+    const date = new Date(now.getFullYear(), now.getMonth() - 5 + index, 1)
+    const month = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
+    return { month, ...(byMonth.get(month) || {}) }
+  })
+}
+
 function Login({ onLogin }) {
   const [username, setUsername] = useState('admin')
   const [password, setPassword] = useState('')
@@ -78,7 +88,7 @@ function Overview({ data, matches, leisure, insights = {}, activities, setActive
   return <div className="page-stack">
     <section className="welcome"><div><span className="eyebrow">{today}</span><h2>早上好，{s.adminName||'管理员'}</h2><p>平台{insights.health?.status==='attention'?'有异常需要关注':'今日运行稳定'}，当前有 <strong>{formatNumber((s.pendingOrganizerCount||0)+(s.pendingPersonalOrganizerCount||0))} 项</strong> 入驻申请等待处理。</p></div><div className="welcome-art"><span/><span/><span/></div></section>
     <div className="stats-grid"><StatCard label="累计赛事" value={formatNumber(matches.totalMatchCount)} hint="平台全部有效赛事" icon={Trophy}/><StatCard label="累计参赛人次" value={formatNumber(matches.participantCount)} hint="已支付且报名有效" icon={Users} tone="blue"/><StatCard label="报名费流水" value={formatMoney(matches.totalEntryFee)} hint="有效报名实收金额" icon={CircleDollarSign} tone="gold"/><StatCard label="待处理事项" value={formatNumber((s.pendingOrganizerCount||0)+(s.pendingPersonalOrganizerCount||0)+(s.pendingFeedbackCount||0))} hint="需要及时处理" icon={Clock3} tone="orange"/></div>
-    <div className="content-grid equal"><Panel title="赛事发布趋势" subtitle="最近六个月真实发布数据"><TrendChart data={insights.matchTrend||[]} valueKey="matchCount"/></Panel><Panel title="有效报名趋势" subtitle="最近六个月已支付报名人次"><TrendChart data={insights.applyTrend||[]} valueKey="participantCount"/></Panel></div>
+    <div className="content-grid equal"><Panel title="赛事发布趋势" subtitle="最近六个月真实发布数据"><TrendChart data={completeMonthlyTrend(insights.matchTrend)} valueKey="matchCount"/></Panel><Panel title="有效报名趋势" subtitle="最近六个月已支付报名人次"><TrendChart data={completeMonthlyTrend(insights.applyTrend)} valueKey="participantCount"/></Panel></div>
     <div className="content-grid two-one"><Panel title="城市赛事分布" subtitle="累计发布赛事数量 TOP 6" action={<button className="text-btn" onClick={()=>setActive('matches')}>查看完整分析 <ArrowRight/></button>}><BarChart data={cityData} valueKey="totalMatches"/></Panel>
       <Panel title="赛事构成" subtitle="按比赛赛制统计"><Donut total={matches.totalMatchCount||0} centerLabel="场赛事" segments={[{label:'单打',value:matches.matchByFormat?.single||0,color:'#3478d4'},{label:'双打',value:matches.matchByFormat?.double||0,color:'#84b6ed'},{label:'团体',value:matches.matchByFormat?.team||0,color:'#b9d7f6'}]}/></Panel></div>
     <div className="content-grid two-one"><Panel title="最新入驻申请" subtitle="机构与个人组织者申请" action={<button className="text-btn" onClick={()=>setActive('organizers')}>全部申请 <ArrowRight/></button>}><DataTable rows={applicationRows} columns={[{key:'name',title:'申请主体'},{key:'type',title:'类型',render:v=><span className="type-text">{v}</span>},{key:'contact',title:'联系人'},{key:'createTime',title:'申请时间',render:v=><span className="muted-cell">{String(v||'').slice(5,16)}</span>},{key:'auditStatus',title:'状态',render:statusBadge}]}/></Panel>

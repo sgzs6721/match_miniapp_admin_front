@@ -47,14 +47,33 @@ export function Donut({ segments, total, centerLabel }) {
 }
 
 export function TrendChart({ data = [], valueKey = 'value', valueFormatter = formatNumber }) {
-  const max = Math.max(...data.map(item => Number(item[valueKey] || 0)), 1)
-  return <div className="trend-chart">
-    <div className="trend-grid"><i/><i/><i/></div>
-    <div className="trend-columns">{data.map((item) => <div className="trend-column" key={item.month}>
-      <span className="trend-tip">{valueFormatter(item[valueKey])}</span>
-      <div style={{height:`${Math.max(8, Number(item[valueKey] || 0) / max * 100)}%`}}/>
-      <small>{String(item.month || '').slice(5)}月</small>
-    </div>)}</div>
+  if (!data.length) return <div className="empty chart-empty"><Inbox/><span>暂无趋势数据</span></div>
+  const width = 600, height = 230, left = 34, right = 18, top = 34, bottom = 34
+  const values = data.map(item => Number(item[valueKey] || 0))
+  const max = Math.max(...values, 1)
+  const plotWidth = width - left - right
+  const plotHeight = height - top - bottom
+  const points = values.map((value, index) => ({
+    x: left + (data.length === 1 ? plotWidth / 2 : index * plotWidth / (data.length - 1)),
+    y: top + plotHeight - value / max * plotHeight,
+    value,
+    label: `${String(data[index].month || '').slice(5)}月`
+  }))
+  const curve = points.reduce((path, point, index) => {
+    if (index === 0) return `M ${point.x} ${point.y}`
+    const previous = points[index - 1]
+    const middle = (previous.x + point.x) / 2
+    return `${path} C ${middle} ${previous.y}, ${middle} ${point.y}, ${point.x} ${point.y}`
+  }, '')
+  const area = `${curve} L ${points.at(-1).x} ${height-bottom} L ${points[0].x} ${height-bottom} Z`
+  const gradientId = `trend-gradient-${valueKey}`
+  return <div className="curve-chart">
+    <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label="趋势曲线图">
+      <defs><linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#3F6FD8" stopOpacity=".24"/><stop offset="100%" stopColor="#3F6FD8" stopOpacity=".015"/></linearGradient></defs>
+      {[0, .5, 1].map((ratio) => <line key={ratio} x1={left} x2={width-right} y1={top+plotHeight*ratio} y2={top+plotHeight*ratio} className="curve-grid"/>)}
+      <path d={area} fill={`url(#${gradientId})`}/><path d={curve} className="curve-line"/>
+      {points.map((point, index) => <g key={`${point.label}-${index}`} className="curve-point"><circle cx={point.x} cy={point.y} r="7"/><circle cx={point.x} cy={point.y} r="3"/><text x={point.x} y={Math.max(16,point.y-14)}>{valueFormatter(point.value)}</text><text className="curve-month" x={point.x} y={height-9}>{point.label}</text></g>)}
+    </svg>
   </div>
 }
 

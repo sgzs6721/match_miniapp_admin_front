@@ -29,3 +29,21 @@ body{background:#f5f8fc}
 .bar-track{background:#eef3f8}.text-btn{color:#3478d4}.trend.up{color:#3478d4}.badge.success{background:#eaf3ff;color:#2f70c7}
 .quick-icon.green{background:#edf5ff;color:#3478d4}.activity-dot{background:#edf5ff;color:#3478d4}
 .trend-chart{height:220px;position:relative;padding:10px 8px 0}.trend-grid{position:absolute;inset:14px 8px 32px;display:flex;flex-direction:column;justify-content:space-between}.trend-grid i{display:block;border-top:1px dashed #e4ebf4}.trend-columns{height:100%;display:flex;align-items:flex-end;gap:clamp(10px,2.4vw,30px);position:relative;padding:20px 12px 28px}.trend-column{height:100%;flex:1;display:flex;align-items:center;justify-content:flex-end;flex-direction:column;position:relative;min-width:24px}.trend-column>div{width:min(34px,72%);min-height:8px;background:linear-gradient(180deg,#62a1eb,#3478d4);border-radius:7px 7px 3px 3px;box-shadow:0 8px 15px rgba(52,120,212,.13);transition:height .55s ease}.trend-column small{position:absolute;bottom:-22px;color:#8290a3;font-size:9px}.trend-tip{font-size:9px;font-weight:700;color:#435674;margin-bottom:6px}.panel{transition:box-shadow .2s,border-color .2s}.panel:hover{border-color:#d5e1ef;box-shadow:0 14px 36px rgba(41,81,132,.09)}
+
+/* 专业雾面主题：低饱和色彩、半透明表面和克制的景深 */
+body{background:radial-gradient(circle at 15% 5%,rgba(117,157,211,.13),transparent 30%),radial-gradient(circle at 88% 20%,rgba(138,192,185,.12),transparent 27%),linear-gradient(145deg,#f5f7fb 0%,#eef2f7 52%,#f6f5fa 100%);background-attachment:fixed}
+.sidebar{background:rgba(250,252,255,.82);backdrop-filter:blur(22px) saturate(125%);-webkit-backdrop-filter:blur(22px) saturate(125%);border-right:1px solid rgba(255,255,255,.8);box-shadow:10px 0 35px rgba(54,74,106,.06)}
+.topbar{background:rgba(250,252,255,.74);backdrop-filter:blur(20px) saturate(130%);-webkit-backdrop-filter:blur(20px) saturate(130%);border-bottom:1px solid rgba(255,255,255,.8)}
+.stat-card,.panel{background:rgba(255,255,255,.68);backdrop-filter:blur(18px) saturate(118%);-webkit-backdrop-filter:blur(18px) saturate(118%);border:1px solid rgba(255,255,255,.86);box-shadow:0 14px 34px rgba(49,67,96,.065),inset 0 1px rgba(255,255,255,.8)}
+.stat-card:hover,.panel:hover{border-color:rgba(255,255,255,.96);box-shadow:0 18px 44px rgba(48,70,105,.095),inset 0 1px rgba(255,255,255,.9)}
+.welcome{background:linear-gradient(118deg,rgba(72,112,170,.88),rgba(97,129,175,.76) 52%,rgba(93,153,158,.72));border:1px solid rgba(255,255,255,.4);box-shadow:0 18px 38px rgba(59,89,132,.16),inset 0 1px rgba(255,255,255,.28);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.welcome-art span{border-color:rgba(255,255,255,.1)}.welcome-art span:nth-child(2){border-color:rgba(210,230,246,.7)}
+.stat-icon{background:linear-gradient(145deg,rgba(218,232,250,.8),rgba(239,245,252,.72));color:#557da9;border:1px solid rgba(255,255,255,.76)}
+.tone-blue .stat-icon{background:linear-gradient(145deg,rgba(215,235,241,.8),rgba(237,246,248,.72));color:#527f8c}.tone-gold .stat-icon{background:linear-gradient(145deg,rgba(240,229,207,.78),rgba(249,245,235,.7));color:#96784f}.tone-orange .stat-icon{background:linear-gradient(145deg,rgba(237,220,217,.76),rgba(249,240,238,.7));color:#9c6b63}
+.primary-btn{background:linear-gradient(135deg,rgba(62,101,158,.94),rgba(74,118,173,.9));box-shadow:0 12px 28px rgba(51,86,136,.2)}
+.trend-column>div{background:linear-gradient(180deg,rgba(115,153,203,.72),rgba(72,114,170,.9));box-shadow:0 10px 20px rgba(63,101,153,.12)}
+.bar-track{background:rgba(213,222,234,.5)}.bar-track i{opacity:.78}
+.quick-list>div{background:rgba(244,247,251,.63);border:1px solid rgba(255,255,255,.7)}
+.system-health{background:rgba(239,245,250,.7);border:1px solid rgba(255,255,255,.74)}
+.global-search,.icon-btn,.refresh-btn{background:rgba(255,255,255,.58);border-color:rgba(212,222,235,.72)}
+.login-page{background:linear-gradient(145deg,#f5f8fc,#edf2f8)}.login-brand{background:linear-gradient(140deg,rgba(228,238,250,.96),rgba(214,229,246,.88) 55%,rgba(221,239,237,.86))}

@@ -21,16 +21,16 @@ const navItems = [
 const statusBadge = (value) => <span className={`badge ${value === 0 ? 'pending' : 'success'}`}>{value === 0 ? '待审核' : '已通过'}</span>
 
 function Login({ onLogin }) {
-  const [token, setToken] = useState('')
+  const [username, setUsername] = useState('admin')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const submit = async (event) => {
     event.preventDefault(); setError(''); setLoading(true)
     try {
-      auth.setToken(token)
-      const user = await adminApi.verify()
-      if (Number(user?.admin) !== 1) throw new Error('该账号不是平台管理员')
-      onLogin(false, user)
+      const result = await adminApi.login(username, password)
+      auth.setToken(result.token)
+      onLogin(false, result.user)
     } catch (e) { auth.clear(); setError(e.message || '令牌验证失败') }
     finally { setLoading(false) }
   }
@@ -43,13 +43,14 @@ function Login({ onLogin }) {
     </section>
     <section className="login-box">
       <div className="login-card">
-        <span className="eyebrow">ADMIN CONSOLE</span><h2>欢迎回来</h2><p>使用管理员令牌安全进入运营中心</p>
-        <form onSubmit={submit}><label>访问令牌</label><div className="token-field"><ShieldCheck/><input autoFocus type="password" value={token} onChange={e=>setToken(e.target.value)} placeholder="粘贴 Bearer Token"/></div>
+        <span className="eyebrow">ADMIN CONSOLE</span><h2>欢迎回来</h2><p>登录乒乓赛事运营管理中心</p>
+        <form onSubmit={submit}><label>用户名</label><div className="token-field"><UserCheck/><input autoFocus value={username} onChange={e=>setUsername(e.target.value)} placeholder="请输入用户名" autoComplete="username"/></div>
+          <label className="password-label">密码</label><div className="token-field"><ShieldCheck/><input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="请输入密码" autoComplete="current-password"/></div>
           {error && <div className="form-error"><AlertCircle/>{error}</div>}
-          <button className="primary-btn" disabled={!token.trim() || loading}>{loading ? <RefreshCw className="spin"/> : <><span>进入运营中心</span><ArrowRight/></>}</button>
+          <button className="primary-btn" disabled={!username.trim() || !password || loading}>{loading ? <RefreshCw className="spin"/> : <><span>登录</span><ArrowRight/></>}</button>
         </form>
         {import.meta.env.DEV && <button className="demo-btn" onClick={()=>onLogin(true, mockData.user)}><Gauge/>预览演示数据</button>}
-        <p className="login-help">当前沿用小程序管理员 JWT，后续可平滑接入账号密码或扫码登录。</p>
+        <p className="login-help">初始账号与密码均为 admin，请登录后尽快修改默认密码。</p>
       </div>
     </section>
   </main>

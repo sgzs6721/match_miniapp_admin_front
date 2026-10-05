@@ -47,3 +47,20 @@ body{background:radial-gradient(circle at 15% 5%,rgba(117,157,211,.13),transpare
 .system-health{background:rgba(239,245,250,.7);border:1px solid rgba(255,255,255,.74)}
 .global-search,.icon-btn,.refresh-btn{background:rgba(255,255,255,.58);border-color:rgba(212,222,235,.72)}
 .login-page{background:linear-gradient(145deg,#f5f8fc,#edf2f8)}.login-brand{background:linear-gradient(140deg,rgba(228,238,250,.96),rgba(214,229,246,.88) 55%,rgba(221,239,237,.86))}
+
+/* 与小程序统一的品牌蓝：#3F6FD8 / #6D5DF6 */
+:root{--green:#3f6fd8;--green-dark:#345fc0;--green-soft:#eef3ff}
+.password-label{margin-top:16px}
+.brand-mark{background:linear-gradient(145deg,#4b83e6,#3f6fd8);box-shadow:0 7px 18px rgba(63,111,216,.2)}
+.sidebar nav button:hover,.sidebar nav button.active{background:linear-gradient(90deg,rgba(63,111,216,.11),rgba(109,93,246,.055));color:#3f6fd8}.sidebar nav button.active{box-shadow:inset 3px 0 #3f6fd8}
+.sidebar nav em,.demo-tag{background:rgba(63,111,216,.1);color:#3f6fd8}.side-brand strong{color:#24375f}
+.welcome{background:linear-gradient(118deg,rgba(63,111,216,.91),rgba(82,123,216,.82) 53%,rgba(109,93,246,.72));box-shadow:0 18px 42px rgba(63,111,216,.2),inset 0 1px rgba(255,255,255,.25)}
+.welcome p{color:rgba(239,245,255,.86)}.welcome .eyebrow{color:#f5d37c}
+.primary-btn{background:linear-gradient(135deg,#3f6fd8,#625edb);box-shadow:0 12px 28px rgba(63,111,216,.24)}
+.text-btn,.trend.up{color:#3f6fd8}.badge.success{background:rgba(63,111,216,.1);color:#3f6fd8}
+.stat-icon{background:linear-gradient(145deg,rgba(224,234,255,.85),rgba(243,246,255,.74));color:#4c72c5}
+.trend-column>div{background:linear-gradient(180deg,rgba(116,154,226,.72),rgba(63,111,216,.94));box-shadow:0 10px 22px rgba(63,111,216,.16)}
+.quick-icon.green,.activity-dot{background:rgba(63,111,216,.1);color:#3f6fd8}
+.token-field:focus-within{border-color:#6f91e2;box-shadow:0 0 0 3px rgba(63,111,216,.1)}
+.login-brand{background:radial-gradient(circle at 22% 18%,rgba(255,255,255,.78),transparent 32%),linear-gradient(140deg,#edf4ff 0%,#dfeaff 52%,#e8e5ff 100%);color:#294a8c}
+.login-brand p,.login-note{color:#6980ad}.login-metrics{border-color:rgba(63,111,216,.14)}

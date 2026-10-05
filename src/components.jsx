@@ -61,7 +61,7 @@ export function TrendChart({ data = [], valueKey = 'value', valueFormatter = for
 export function DataTable({ columns, rows, empty = '暂无数据', onRowClick }) {
   if (!rows?.length) return <div className="empty"><Inbox/><span>{empty}</span></div>
   return <div className="table-wrap"><table><thead><tr>{columns.map(c => <th key={c.key}>{c.title}</th>)}<th/></tr></thead><tbody>
-    {rows.map((row, index) => <tr key={row.id || index} onClick={() => onRowClick?.(row)}>{columns.map(c => <td key={c.key}>{c.render ? c.render(row[c.key], row) : row[c.key] ?? '-'}</td>)}<td><ChevronRight size={16}/></td></tr>)}
+    {rows.map((row, index) => <tr key={`${row.id ?? 'row'}-${index}`} onClick={() => onRowClick?.(row)}>{columns.map(c => <td key={c.key}>{c.render ? c.render(row[c.key], row) : row[c.key] ?? '-'}</td>)}<td><ChevronRight size={16}/></td></tr>)}
   </tbody></table></div>
 }
 

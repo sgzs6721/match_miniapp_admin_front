@@ -34,7 +34,8 @@ async function request(path, options = {}) {
 }
 
 export const adminApi = {
-  verify: () => request('/auth/userinfo'),
+  login: (username, password) => request('/admin/web/login', { method: 'POST', body: JSON.stringify({ username, password }) }),
+  verify: () => request('/admin/web/me'),
   dashboard: (params) => request(`/admin/dashboard${toQuery(params)}`),
   matchStats: () => request('/admin/stats/matches'),
   leisureStats: () => request('/admin/stats/leisure'),
